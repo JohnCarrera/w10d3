@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS coffee_orders;
+
 CREATE TABLE customers (
     id      INTEGER PRIMARY KEY
   , name    VARCHAR(40) NOT NULL
@@ -9,13 +12,7 @@ CREATE TABLE customers (
 
 CREATE TABLE coffee_orders (
   id INTEGER PRIMARY KEY
+  , customer_id INTEGER NOT NULL
   , is_redeemed BOOLEAN DEFAULT false
   , ordered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-UPDATE customers
-SET points = (
-  SELECT points
-  FROM customers AS c
-  WHERE c.name = 'Rachel') + 1
-WHERE name = 'Rachel';
